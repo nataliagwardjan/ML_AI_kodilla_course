@@ -46,22 +46,28 @@ mint_leaf_price = 20.0  # price for 200 g
 
 total_price = roquefort_price + stilton_price + brie_price + gouda_price + edam_price + parmezan_price + mozzarella_price + czechoslowacki_cheese_price + mint_leaf_price
 
-print("Report z zakupów:")
-print("---------------------------")
-print(f"Produkt: {roquefort_name}, masa: {roquefort_weight} kg, cena: {roquefort_price:.2f} zł")
-print(f"Produkt: {stilton_name}, masa: {stilton_weight} kg, cena: {stilton_price:.2f} zł")
-print(f"Produkt: {brie_name}, masa: {brie_weight} kg, cena: {brie_price:.2f} zł")
-print(f"Produkt: {gouda_name}, masa: {gouda_weight} kg, cena: {gouda_price:.2f} zł")
-print(f"Produkt: {edam_name}, masa: {edam_weight} kg, cena: {edam_price:.2f} zł")
-print(f"Produkt: {parmezan_name}, masa: {parmezan_weight} kg, cena: {parmezan_price:.2f} zł")
-print(f"Produkt: {mozzarella_name}, masa: {mozzarella_weight} kg, cena: {mozzarella_price:.2f} zł")
-print(
-    f"Produkt: {czechoslowacki_cheese_name}, masa: {czechoslowacki_cheese_weight} kg, cena: {czechoslowacki_cheese_price:.2f} zł")
-print(
-    f"Produkt: {mint_leaf_name}, masa: {mint_leaf_weight} kg, cena: {mint_leaf_price:.2f} zł")
-print("---------------------------")
-print(f"Suma: {total_price} zł")
-print("---------------------------")
+
+header = f"{'Nazwa sera':<{len(czechoslowacki_cheese_name) + 2}} | {'masa, kg':>10} | {'cena, zł':>10}"
+line = "-" * len(header)
+sum_price_str = f"{total_price:>10.2f}"
+sum_line = f"{'Suma':<{(len(czechoslowacki_cheese_name) + 2) + 3}}{' ' * 10} | {sum_price_str}"
+
+message = f"""
+{header}
+{line}
+{roquefort_name:<{len(czechoslowacki_cheese_name) + 2}} | {roquefort_weight:>10.1f} | {roquefort_price:>10.2f}
+{brie_name:<{len(czechoslowacki_cheese_name) + 2}} | {brie_weight:>10.1f} | {brie_price:>10.2f}
+{stilton_name:<{len(czechoslowacki_cheese_name) + 2}} | {stilton_weight:>10.1f} | {stilton_price:>10.2f}
+{gouda_name:<{len(czechoslowacki_cheese_name) + 2}} | {gouda_weight:>10.1f} | {gouda_price:>10.2f}
+{edam_name:<{len(czechoslowacki_cheese_name) + 2}} | {edam_weight:>10.1f} | {edam_price:>10.2f}
+{parmezan_name:<{len(czechoslowacki_cheese_name) + 2}} | {parmezan_weight:>10.1f} | {parmezan_price:>10.2f}
+{mozzarella_name:<{len(czechoslowacki_cheese_name) + 2}} | {mozzarella_weight:>10.1f} | {parmezan_price:>10.2f}
+{czechoslowacki_cheese_name:<{len(czechoslowacki_cheese_name) + 2}} | {czechoslowacki_cheese_weight:>10.1f} | {czechoslowacki_cheese_price:>10.2f}
+{line}
+{sum_line}
+"""
+
+print(message)
 print()
 print()
 
@@ -116,12 +122,20 @@ products = [roquefort, stilton, brie, gouda, edam, parmezan, mozzarella, czechos
 
 total_price = 0.0
 
-print("Report z zakupów:")
-print("---------------------------")
+rows = []
+
 for product in products:
-    print(f"Produkt: {product['name']}, masa: {product['weight']} kg, cena: {product['price']:.2f} zł")
+    mass_str = f"{product['weight']:>10.1f}"
+    price_str = f"{product['price']:>10.2f}"
+    rows.append(f"{product['name']:<{len(czechoslowacki_cheese_name) + 2}} | {mass_str} | {price_str}")
     total_price += product['price']
-print(f"Suma: {total_price:.2f} zł")
-print("---------------------------")
-print()
+
+header = f"{'Nazwa sera':<{len(czechoslowacki_cheese_name) + 2}} | {'masa, kg':>10} | {'cena, zł':>10}"
+line = "-" * len(header)
+sum_price_str = f"{total_price:>10.2f}"
+sum_line = f"{'Suma':<{(len(czechoslowacki_cheese_name) + 2) + 3}}{' ' * 10} | {sum_price_str}"
+
+message = "\n".join([header, line] + rows + [line, sum_line])
+
+print(message)
 print()
