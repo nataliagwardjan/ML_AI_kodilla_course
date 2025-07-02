@@ -39,14 +39,18 @@ czechoslowacki_cheese_name = 'czechoslowacki ser z owczego mleka'
 czechoslowacki_cheese_weight = 1.0
 czechoslowacki_cheese_price = 122.32 * czechoslowacki_cheese_weight
 
+message = f"""
+Report
+-----------------------------------------
+Ser: {roquefort_name}, ilość: {roquefort_weight} kg, cena: {roquefort_price} zł,
+Ser: {brie_name}, ilość: {brie_weight} kg, cena: {brie_price} zł,
+Ser: {stilton_name}, ilość: {stilton_weight} kg, cena: {stilton_price} zł,
+Ser: {brie_name}, ilość: {brie_weight} kg, cena: {brie_price} zł,
+Ser: {gouda_name}, ilość: {gouda_weight} kg, cena: {gouda_price} zł,
+Ser: {edam_name}, ilość: {edam_weight} kg, cena: {edam_price} zł,
+Ser: {parmezan_name}, ilość: {parmezan_weight} kg, cena: {parmezan_price} zł,
+Ser: {mozzarella_name}, ilość: {mozzarella_weight} kg, cena: {mozzarella_price} zł,
+Ser: {czechoslowacki_cheese_name}, ilość: {czechoslowacki_cheese_weight} kg, cena: {czechoslowacki_cheese_price} zł
+"""
 
-print("Report")
-print("---------------------------")
-print(f"Ser: {roquefort_name}, ilość: {roquefort_weight} kg, cena: {roquefort_price} zł")
-print(f"Ser: {stilton_name}, ilość: {stilton_weight} kg, cena: {stilton_price} zł")
-print(f"Ser: {brie_name}, ilość: {brie_weight} kg, cena: {brie_price} zł")
-print(f"Ser: {gouda_name}, ilość: {gouda_weight} kg, cena: {gouda_price} zł")
-print(f"Ser: {edam_name}, ilość: {edam_weight} kg, cena: {edam_price} zł")
-print(f"Ser: {parmezan_name}, ilość: {parmezan_weight} kg, cena: {parmezan_price} zł")
-print(f"Ser: {mozzarella_name}, ilość: {mozzarella_weight} kg, cena: {mozzarella_price} zł")
-print(f"Ser: {czechoslowacki_cheese_name}, ilość: {czechoslowacki_cheese_weight} kg, cena: {czechoslowacki_cheese_price} zł")
+print(message)
