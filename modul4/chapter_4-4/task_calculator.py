@@ -3,12 +3,38 @@ import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 
-def multiplucation_numbers(list_of_numbers: list[float]) -> float:
+def addition_numbers(list_of_numbers: list[float]) -> tuple[float, str]:
+    result = 0.0
+    for number in list_of_numbers:
+        result += number
+    return result, 'addition'
+
+
+def subtraction_numbers(list_of_numbers: list[float]) -> tuple[float, str]:
+    return (list_of_numbers[0] - list_of_numbers[1]), 'subtraction'
+
+
+def division_numbers(list_of_numbers: list[float]) -> tuple[float, str] | None:
+    if list_of_numbers[1] == 0.0:
+        logging.error("Cannot division by zero!")
+        return None
+    else:
+        return (list_of_numbers[0] / list_of_numbers[1]), 'division'
+
+
+def multiplication_numbers(list_of_numbers: list[float]) -> tuple[float, str]:
     result = 1.0
     for number in list_of_numbers:
         result *= number
-    return result
+    return result, 'multiplication'
 
+
+calculate_result = {
+    '1': addition_numbers,
+    '2': subtraction_numbers,
+    '3': division_numbers,
+    '4': multiplication_numbers
+}
 
 print(f"""
 Which action do you want to perform? 
@@ -29,28 +55,16 @@ else:
     arg_list = arg.split(',')
     try:
         arg_list_numbers = [float(item) for item in arg_list]
-    except ValueError as e:
-        ValueError: logging.error("Given elements not numbers")
+    except ValueError:
+        logging.error("Given elements not numbers")
     else:
         if len(arg_list_numbers) < 2:
             logging.warning("Too less numbers, cannot calculate, result will be a given number")
-        if (choice == '2' or choice == '4') and len(arg_list_numbers) > 2:
+        if choice in ('2','4') and len(arg_list_numbers) > 2:
             logging.warning("Only two first numbers will be taken to action")
-        if choice == '2':
-            result = arg_list_numbers[0] - arg_list_numbers[1]
-            action = "subtraction"
-        elif choice == '4':
-            action = "division"
-            if arg_list_numbers[1] == 0.0:
-                logging.error("Cannot division by zero!")
-            else:
-                result = arg_list_numbers[0] / arg_list_numbers[1]
-        elif choice == '1':
-            result = sum(arg_list_numbers)
-            action = "addition"
+            arg_list_numbers = arg_list_numbers[:2]
         else:
-            result = multiplucation_numbers(arg_list_numbers)
-            action = "multiplication"
+            result, action = calculate_result[choice](arg_list_numbers)
         print(f"You chose {action} for numbers {arg_list_numbers}, result is {result}")
 
 print()
@@ -83,7 +97,7 @@ match choice:
                         if len(numbers) > 2:
                             logging.warning("Only the first two numbers were used for subtraction.")
                     case '3':  # Multiplication
-                        result = multiplucation_numbers(numbers)
+                        result = multiplication_numbers(numbers)
                         action = "multiplication"
                     case '4':  # Division
                         action = "division"
