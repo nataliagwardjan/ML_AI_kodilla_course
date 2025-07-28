@@ -4,12 +4,16 @@ def is_palindrome(text: str):
     Return True if text is palindrome
     and False if text is not palindrome
     """
-    for i in range(len(text) // 2):
-        if text[i] != text[-(i + 1)]:
-            return False
-    return True
+    checking_text = ''.join(char for char in text if not char.isspace())
+    return checking_text.lower() == checking_text[::-1].lower()
 
 result = is_palindrome("kajak")
-print(f"Is word kajak a palindrome? {result}")
+print(f"Is word 'kajak' a palindrome? {result}")
 result = is_palindrome("text")
-print(f"Is word text a palindrome? {result}")
+print(f"Is word 'text' a palindrome? {result}")
+result = is_palindrome("Kobyla ma maly bok")
+print(f"Is sentence 'Kobyla ma maly bok' a palindrome? {result}")
+result = is_palindrome("A to idiota")
+print(f"Is sentence 'A to idiota' a palindrome? {result}")
+result = is_palindrome("Zwykle zdanie")
+print(f"Is sentence 'Zwykle zdanie' a palindrome? {result}")
