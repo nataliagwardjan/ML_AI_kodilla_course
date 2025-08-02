@@ -4,7 +4,7 @@ def is_palindrome(text: str):
     Return True if text is palindrome
     and False if text is not palindrome
     """
-    checking_text = ''.join(char for char in text if not char.isspace())
+    checking_text = ''.join(char for char in text if char.isalnum())
     return checking_text.lower() == checking_text[::-1].lower()
 
 result = is_palindrome("kajak")
