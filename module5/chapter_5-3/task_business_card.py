@@ -1,6 +1,6 @@
-import random
-
 from faker import Faker
+import datetime
+import random
 
 fake = Faker()
 
@@ -60,6 +60,17 @@ def create_contact(contact_type):
                            phone=phone)
 
 
+def creation_time(function):
+    def inter_function(*args):
+        start = datetime.datetime.now()
+        result = function(*args)
+        duration = datetime.datetime.now() - start
+        return result, duration.total_seconds()
+
+    return inter_function
+
+
+@creation_time
 def create_contact_list(contact_type, amount):
     card_list = []
     for i in range(amount):
@@ -67,14 +78,15 @@ def create_contact_list(contact_type, amount):
     return card_list
 
 
-business_contact_list = create_contact_list(BusinessContact, 2)
-base_contact_list = create_contact_list(BaseContact, 3)
+business_contact_list, time_business = create_contact_list(BusinessContact, 2)
+base_contact_list, time_basic = create_contact_list(BaseContact, 3)
 
 for item in business_contact_list:
     print(item)
     print(item.contact())
+print(f"Time for create business contact list is: {time_business} seconds")
 
 for item in base_contact_list:
     print(item)
     print(item.contact())
-
+print(f"Time for create basic contact list is: {time_basic} seconds")
